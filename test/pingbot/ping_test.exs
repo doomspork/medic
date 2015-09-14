@@ -7,7 +7,6 @@ defmodule Pingbot.PingTest do
     Ping.ping("127.0.0.1", self)
 
     assert_receive {:ok, "127.0.0.1", time}
-    IO.inspect time
     assert is_float(time)
   end
 

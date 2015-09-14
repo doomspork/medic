@@ -1,0 +1,2 @@
+defmodule Pingbot do
+end

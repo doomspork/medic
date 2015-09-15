@@ -14,12 +14,15 @@ Pingbots maintain a list of addresses and report their ping status on a recurrin
 
 ## Configuration
 
-Update `config/config.exs` with the address to your mothership instance:
+Update `config/config.exs` with your report and update URLs:
 
 ```elixir
-config :pingbot, :mothership, "example.org"
+config :pingbot,
+  report_url: "",
+  update_url: "",
+  update_freq: 3200000
 ```
-  
+
 ## Running
 
 	$ mix run --no-halt

@@ -1,5 +1,7 @@
-defmodule Pingbot.Updater do
-  use Pingbot.Recur
+defmodule Medic.Updater do
+  use Medic.Recur
+
+  alias Medic.Storage
 
   def handle_cast(:tick, opts) do
     opts[:dest]
@@ -20,6 +22,6 @@ defmodule Pingbot.Updater do
 
   defp update_storage(msg) when is_binary(msg), do: IO.error(msg)
   defp update_storage(data) when is_list(data) do
-    Pingbot.Storage.update(data)
+    Storage.update(data)
   end
 end

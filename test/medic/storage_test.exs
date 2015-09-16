@@ -1,7 +1,7 @@
-defmodule Pingbot.StorageTest do
+defmodule Medic.StorageTest do
   use ExUnit.Case
 
-  alias Pingbot.Storage
+  alias Medic.Storage
 
   setup_all do
     Storage.start_link

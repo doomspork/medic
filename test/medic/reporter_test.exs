@@ -1,7 +1,7 @@
-defmodule Pingbot.ReporterTest do
+defmodule Medic.ReporterTest do
   use ExUnit.Case
 
-  alias Pingbot.Reporter
+  alias Medic.Reporter
 
   test "transmits the ping report" do
     report = {:ok, "127.0.0.1", false}

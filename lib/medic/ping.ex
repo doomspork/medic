@@ -1,4 +1,4 @@
-defmodule Pingbot.Ping do
+defmodule Medic.Ping do
   @moduledoc """
   Ping an IP or hostname, notifying the Reporter of the outcome
   """

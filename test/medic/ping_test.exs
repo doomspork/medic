@@ -1,7 +1,7 @@
-defmodule Pingbot.PingTest do
+defmodule Medic.PingTest do
   use ExUnit.Case
 
-  alias Pingbot.Ping
+  alias Medic.Ping
 
   test "reports successful pings" do
     assert {:ok, "127.0.0.1", time} = Ping.ping("127.0.0.1")

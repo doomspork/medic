@@ -1,4 +1,4 @@
-defmodule Pingbot.Recur do
+defmodule Medic.Recur do
   defmacro __using__(_opts) do
     quote do
       use GenServer

@@ -1,9 +1,9 @@
-defmodule Pingbot.CheckerTest do
+defmodule Medic.CheckerTest do
   use ExUnit.Case
 
-  alias Pingbot.Checker
-  alias Pingbot.Reporter
-  alias Pingbot.Storage
+  alias Medic.Checker
+  alias Medic.Reporter
+  alias Medic.Storage
 
   setup_all do
     Storage.start_link(["127.0.0.1"])

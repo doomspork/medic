@@ -15,7 +15,7 @@ config :logger, :console,
   format: "$date $time [$level] $metadata$message\n",
   metadata: [:user_id]
 
-config :pingbot,
+config :medic,
   ping_freq: (1000 * 60),
   report_url: "",
   update_url: "",

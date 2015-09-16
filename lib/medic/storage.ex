@@ -1,4 +1,4 @@
-defmodule Pingbot.Storage do
+defmodule Medic.Storage do
   def list do
     Agent.get(__MODULE__, &(&1))
   end

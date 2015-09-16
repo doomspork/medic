@@ -1,9 +1,9 @@
-defmodule Pingbot.Checker do
-  use Pingbot.Recur
+defmodule Medic.Checker do
+  use Medic.Recur
 
-  alias Pingbot.Ping
-  alias Pingbot.Reporter
-  alias Pingbot.Storage
+  alias Medic.Ping
+  alias Medic.Reporter
+  alias Medic.Storage
 
   def handle_cast(:tick, state) do
     Storage.list

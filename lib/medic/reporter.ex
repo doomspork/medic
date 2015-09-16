@@ -1,4 +1,4 @@
-defmodule Pingbot.Reporter do
+defmodule Medic.Reporter do
   use GenServer
   require Logger
 

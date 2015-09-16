@@ -1,11 +1,11 @@
-# Pingbot
+# Medic
 
-Pingbots maintain a list of addresses and report their ping status on a recurring basis.
+Medic is an daemon for recurring healthchecks on remote hosts.
 
 ## Setup
 
-	$ git clone git@github.com:doomspork/beholder.git
-	$ cd beholder
+	$ git clone git@github.com:doomspork/medic.git
+	$ cd medic
 	$ mix deps.get
 
 ## Testing
@@ -17,7 +17,7 @@ Pingbots maintain a list of addresses and report their ping status on a recurrin
 Configuration can be supplied via command line options or through the application defaults, which are stored in `config/config.exs`:
 
 ```elixir
-config :pingbot,
+config :medic,
   ping_freq: (1000 * 60),
   report_url: "",
   update_url: "",
@@ -38,4 +38,4 @@ config :pingbot,
 
 ## Example
 
-	$ ./pingbot --no-update --stdout --hosts "127.0.0.1,example.com"
+	$ ./medic --no-update --stdout --hosts "127.0.0.1,example.com"

@@ -16,9 +16,12 @@ config :logger, :console,
   metadata: [:user_id]
 
 config :pingbot,
+  ping_freq: (1000 * 60),
   report_url: "",
   update_url: "",
-  update_freq: 3200000
+  update_freq: (1000 * 60 * 60),
+  hosts: [],
+  no_update: false
 
 # It is also possible to import configuration files, relative to this
 # directory. For example, you can emulate configuration per environment

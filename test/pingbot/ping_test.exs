@@ -4,14 +4,11 @@ defmodule Pingbot.PingTest do
   alias Pingbot.Ping
 
   test "reports successful pings" do
-    Ping.ping("127.0.0.1", self)
-
-    assert_receive {:ok, "127.0.0.1", time}
+    assert {:ok, "127.0.0.1", time} = Ping.ping("127.0.0.1")
     assert is_float(time)
   end
 
   test "reports failed pings" do
-    Ping.ping("127.0.0.0", self)
-    assert_receive {:ok, "127.0.0.0", false}
+    assert {:ok, "127.0.0.0", false} = Ping.ping("127.0.0.0")
   end
 end

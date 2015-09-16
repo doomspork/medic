@@ -3,13 +3,9 @@ defmodule Pingbot.ReporterTest do
 
   alias Pingbot.Reporter
 
-  defmodule TestTransmittor do
-    def transmit(dest, report), do: send(dest, report)
-  end
-
   test "transmits the ping report" do
     report = {:ok, "127.0.0.1", false}
-    Reporter.report(report, [transport: TestTransmittor, dest: self])
+    Reporter.handle_cast(report, [transport: Reporter.Inbox, dest: self])
 
     assert_receive %{address: "127.0.0.1", online: false}
   end

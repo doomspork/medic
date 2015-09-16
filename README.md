@@ -18,6 +18,7 @@ Update `config/config.exs` with your report and update URLs:
 
 ```elixir
 config :pingbot,
+  ping_freq: 60000,
   report_url: "",
   update_url: "",
   update_freq: 3200000

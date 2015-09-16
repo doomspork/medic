@@ -4,19 +4,14 @@ defmodule Pingbot.StorageTest do
   alias Pingbot.Storage
 
   setup_all do
-    Storage.start_link ["example.org"]
+    Storage.start_link
+
     {:ok, []}
   end
 
-  test "retrieves the list of hosts" do
-    [h|_t] = Storage.list
-    assert h == "example.org"
-  end
-
-  test "updates the list" do
+  test "updates and retrieves list" do
     hosts = ["example.org", "example.com"]
     Storage.update(hosts)
-    hosts = Storage.list
-    assert length(hosts) == 2
+    assert ^hosts = Storage.list
   end
 end

@@ -7,6 +7,7 @@ defmodule Pingbot.Mixfile do
      elixir: "~> 1.0",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     escript: escript,
      deps: deps]
   end
 
@@ -17,6 +18,9 @@ defmodule Pingbot.Mixfile do
     [applications: [:httpoison, :logger]]
   end
 
+  def escript do
+    [main_module: Pingbot]
+  end
   # Dependencies can be Hex packages:
   #
   #   {:mydep, "~> 0.3.0"}

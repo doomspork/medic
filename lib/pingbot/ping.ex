@@ -10,16 +10,7 @@ defmodule Pingbot.Ping do
   `{:error, ip, error}` when some error caused us to not be able to run the
   ping command.
   """
-  def ping(address, notify \\ Pingbot.Reporter) do
-    send notify, do_ping(address)
-  end
-
-  defp darwin? do
-    {output, 0} = System.cmd("uname", [])
-    String.rstrip(output) == "Darwin"
-  end
-
-  defp do_ping(address) do
+  def ping(address) do
     try do
       {cmd_output, _} = System.cmd("ping", ping_args(address))
       time = parse_output(cmd_output)
@@ -29,9 +20,14 @@ defmodule Pingbot.Ping do
     end
   end
 
+  defp darwin? do
+    {output, 0} = System.cmd("uname", [])
+    String.rstrip(output) == "Darwin"
+  end
+
   defp ping_args(address) do
     wait_opt = if darwin?, do: "-W", else: "-w"
-    ["-c", "1", wait_opt, "5", address]
+    ["-c", "1", wait_opt, "100", address]
   end
 
   defp parse_output(output) do

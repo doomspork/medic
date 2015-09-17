@@ -16,12 +16,12 @@ config :logger, :console,
   metadata: [:user_id]
 
 config :medic,
-  ping_freq: (1000 * 60),
+  check_freq: (1000 * 60),
+  checks: [],
+  no_update: false,
   report_url: "",
-  update_url: "",
   update_freq: (1000 * 60 * 60),
-  hosts: [],
-  no_update: false
+  update_url: ""
 
 # It is also possible to import configuration files, relative to this
 # directory. For example, you can emulate configuration per environment

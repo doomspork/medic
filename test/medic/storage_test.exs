@@ -9,9 +9,10 @@ defmodule Medic.StorageTest do
     {:ok, []}
   end
 
+  @checks [%{address: "example.org"}, %{address: "example.com"}]
+
   test "updates and retrieves list" do
-    hosts = ["example.org", "example.com"]
-    Storage.update(hosts)
-    assert ^hosts = Storage.list
+    Storage.update(@checks)
+    assert @checks = Storage.list
   end
 end

@@ -1,8 +1,8 @@
-defmodule Pingbot.Mixfile do
+defmodule Medic.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :pingbot,
+    [app: :medic,
      version: "0.0.1",
      elixir: "~> 1.0",
      build_embedded: Mix.env == :prod,
@@ -19,7 +19,7 @@ defmodule Pingbot.Mixfile do
   end
 
   def escript do
-    [main_module: Pingbot]
+    [main_module: Medic]
   end
   # Dependencies can be Hex packages:
   #

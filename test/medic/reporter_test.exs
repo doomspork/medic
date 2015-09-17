@@ -2,11 +2,12 @@ defmodule Medic.ReporterTest do
   use ExUnit.Case
 
   alias Medic.Reporter
+  alias Medic.Report
 
   test "transmits the ping report" do
-    report = {:ok, "127.0.0.1", false}
+    report = %Report{check_id: 1, results: %{}}
     Reporter.handle_cast(report, [transport: Reporter.Inbox, dest: self])
 
-    assert_receive %{address: "127.0.0.1", online: false}
+    assert_receive ^report
   end
 end

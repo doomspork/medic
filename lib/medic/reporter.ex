@@ -15,23 +15,9 @@ defmodule Medic.Reporter do
   end
 
   defmodule StdOut do
-    def transmit(_dest, report) do
-      report
-      |> make_string
+    def transmit(_dest, %{address: address, check_id: id, results: %{time: time}}) do
+      "#{address} (#{id}): #{time}ms"
       |> IO.puts
-    end
-
-    defp make_string(report) do
-      report.address <> ": " <> outcome(report)
-    end
-
-    defp outcome(report) do
-      if report.online do
-         time = Float.to_string(report.ms, [decimals: 4, compact: true])
-         time <> "ms"
-      else
-        "unavailable"
-      end
     end
   end
 
@@ -47,22 +33,11 @@ defmodule Medic.Reporter do
 
   def init(opts), do: {:ok, Keyword.merge(@defaults, opts)}
 
-  def report(outcome), do: GenServer.cast(__MODULE__, outcome)
+  def report(report), do: GenServer.cast(__MODULE__, report)
 
-  def handle_cast(outcome, opts) do
-    outcome
-    |> format_report
-    |> submit_async(opts)
+  def handle_cast(report, opts) do
+    Task.async(opts[:transport], :transmit, [opts[:dest], report])
 
     {:noreply, opts}
   end
-
-  defp format_report({:ok, address, false}), do: %{address: address, online: false}
-  defp format_report({:ok, address, time}), do: %{address: address, online: true, ms: time}
-  defp format_report({:error, _address, error}), do: error
-
-  defp submit_async(report, opts) when is_map(report) do
-    Task.async(opts[:transport], :transmit, [opts[:dest], report])
-  end
-  defp submit_async(err, _opts), do: Logger.error(err)
 end

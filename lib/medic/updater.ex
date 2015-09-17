@@ -2,6 +2,7 @@ defmodule Medic.Updater do
   use Medic.Recur
 
   alias Medic.Storage
+  alias Medic.Check
 
   def handle_cast(:tick, opts) do
     opts[:dest]
@@ -14,7 +15,10 @@ defmodule Medic.Updater do
 
   defp request_list(url), do: HTTPoison.get(url)
 
-  defp parse_response({:ok, %{status_code: 200, body: body}}), do: Poison.decode!(body)
+  defp parse_response({:ok, %{status_code: 200, body: body}}) do
+    Poison.decode!(body, as: [Check])
+  end
+
   defp parse_response({:ok, %{status_code: _others}}) do
     "Error occurred contacting the update server."
   end

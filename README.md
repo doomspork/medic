@@ -2,6 +2,11 @@
 
 Medic is an daemon for recurring healthchecks on remote hosts.
 
+## Requirements
+
+  + Erlang 18
+  + Elixir 1.0
+
 ## Setup
 
 	$ git clone git@github.com:doomspork/medic.git

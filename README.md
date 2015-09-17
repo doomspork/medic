@@ -19,23 +19,26 @@ Medic is an daemon for recurring healthchecks on remote hosts.
 
 ## Configuration
 
-Configuration can be supplied via command line options or through the application defaults, which are stored in `config/config.exs`:
+Configuration are supplied through command line options or application configuration, which is stored in `config/config.exs`:
 
 ```elixir
 config :medic,
-  ping_freq: (1000 * 60),
+  check_freq: (1000 * 60),
+  checks: [],
+  no_update: false,
   report_url: "",
-  update_url: "",
   update_freq: (1000 * 60 * 60),
-  hosts: [],
-  no_update: false
+  update_url: ""
 ```
 
 ### Options
 
 + `--stdout` – Report pings through standard out
 + `--no-update` - Disable recurring updates to the host list
-+ `--hosts "example.org,example.com"` - Seed the storage with hosts, given as a comma delimited string
++ `--ping "example.org,example.com"` - Add `ping` health checks.
++ `--get "example.org,example.com"` - Add HTTP GET health checks.
+
+_Note_: When supplied through the command line the `%Check{}` id is set to the check type.
 
 ## Building
 
@@ -43,4 +46,4 @@ config :medic,
 
 ## Example
 
-	$ ./medic --no-update --stdout --hosts "127.0.0.1,example.com"
+	$ ./medic --no-update --stdout --get "seancallan.com,cityleash.com" --ping "127.0.0.1"

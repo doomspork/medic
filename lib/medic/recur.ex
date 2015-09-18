@@ -1,4 +1,7 @@
 defmodule Medic.Recur do
+  @moduledoc """
+  Support recurring functionality within a module.
+  """
   defmacro __using__(_opts) do
     quote do
       use GenServer

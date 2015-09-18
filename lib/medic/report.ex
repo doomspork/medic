@@ -1,4 +1,8 @@
 defmodule Medic.Report do
+  @moduledoc """
+  Struct representation of a health check report.
+  """
+
   defstruct address: nil,
             check_id: nil,
             results: %{},

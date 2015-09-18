@@ -1,4 +1,8 @@
 defmodule Medic.Storage do
+  @moduledoc """
+  Simple storage for our current list of health checks.
+  """
+
   def list do
     Agent.get(__MODULE__, &(&1))
   end

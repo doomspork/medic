@@ -1,7 +1,16 @@
 defmodule Medic.Checks.Get do
+  @moduledoc """
+  Make an HTTP Get request to a given address return the request body
+  and time.
+  """
+
   alias Medic.Report
 
   defmodule TimedRequest do
+    @moduledoc """
+    A wrapper for HTTPoison so can track the request time.
+    """
+
     use HTTPoison.Base
 
     def request(method, url, body \\ "", headers \\ [], options \\ []) do
@@ -9,6 +18,9 @@ defmodule Medic.Checks.Get do
     end
   end
 
+  @doc """
+  Perform a timed HTTP request for a given address.
+  """
   def perform(%{address: address, id: id}) do
     {time, response} = TimedRequest.get(address)
 

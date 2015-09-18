@@ -1,9 +1,16 @@
 defmodule Medic.Updater do
+  @moduledoc """
+  Request health check updates from a remote host on a recurring basis.
+  """
+
   use Medic.Recur
 
   alias Medic.Storage
   alias Medic.Check
 
+  @doc """
+  Request an updated list of of health checks from the configured destination.
+  """
   def handle_cast(:tick, opts) do
     opts[:dest]
     |> request_list

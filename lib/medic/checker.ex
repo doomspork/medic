@@ -1,4 +1,8 @@
 defmodule Medic.Checker do
+  @moduledoc """
+  Execute our list of health checks on a recurring basis
+  """
+
   use Medic.Recur
 
   alias Medic.Checks.Get
@@ -13,6 +17,9 @@ defmodule Medic.Checker do
     {:noreply, state}
   end
 
+  @doc """
+  Perform the provided check and submit the report.
+  """
   def check(check) do
     check
     |> perform

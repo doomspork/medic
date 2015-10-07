@@ -21,16 +21,16 @@ defmodule Medic.Checks.Get do
   @doc """
   Perform a timed HTTP request for a given address.
   """
-  def perform(%{address: address, id: id}) do
+  def perform(%{target: address, id: id}) do
     {time, response} = TimedRequest.get(address)
 
-    body = case response do
+    _body = case response do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} -> body
       _ -> nil
     end
 
     time = time / 1000.0
 
-    %Report{address: address, check_id: id, results: %{body: body, time: time}}
+    %Report{health_check_id: id, successful: not is_nil(time), response_time: time}
   end
 end

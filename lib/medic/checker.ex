@@ -2,8 +2,9 @@ defmodule Medic.Checker do
   @moduledoc """
   Execute our list of health checks on a recurring basis
   """
-
   use Medic.Recur
+
+  require Logger
 
   alias Medic.Checks.Get
   alias Medic.Checks.Ping
@@ -26,6 +27,7 @@ defmodule Medic.Checker do
     |> Reporter.report
   end
 
-  defp perform(%{type: :get} = check), do: Get.perform(check)
-  defp perform(%{type: :ping} = check), do: Ping.perform(check)
+  defp perform(%{type: "get"} = check), do: Get.perform(check)
+  defp perform(%{type: "ping"} = check), do: Ping.perform(check)
+  defp perform(%{type: type}), do: Logger.error("Unknown type: #{type}")
 end

@@ -31,7 +31,7 @@ defmodule Medic.Mixfile do
   #
   # Type `mix help deps` for more examples and options
   defp deps do
-    [{:httpoison, "~> 0.7.2"},
+    [{:httpoison, "~> 0.7.4"},
      {:poison, "~> 1.4.0"}]
   end
 end

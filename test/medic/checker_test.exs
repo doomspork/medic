@@ -6,7 +6,7 @@ defmodule Medic.CheckerTest do
   alias Medic.Storage
 
   setup_all do
-    check = %{address: "127.0.0.1", type: :ping, id: 1}
+    check = %{target: "127.0.0.1", type: :ping, id: 1}
     Storage.start_link([check])
 
     {:ok, []}
@@ -17,7 +17,7 @@ defmodule Medic.CheckerTest do
     Checker.start_link(interval: 500)
     :timer.sleep(1200)
 
-    assert_received %{check_id: 1, results: %{time: _time}}
-    assert_received %{check_id: 1, results: %{time: _time}}
+    assert_received %{health_check_id: 1, successful: true, response_time: _time}
+    assert_received %{health_check_id: 1, successful: true, response_time: _time}
   end
 end

@@ -2,45 +2,11 @@ defmodule Medic.Reporter do
   @moduledoc """
   Report health check results.
   """
-
   use GenServer
+
   require Logger
 
-  defmodule JSON do
-    @moduledoc """
-    Report the results via an JSON API request
-    """
-
-    def transmit(dest, report) do
-      report
-      |> Poison.encode!
-      |> http_post(dest)
-    end
-
-    defp http_post(report, dest) do
-      HTTPoison.post(dest, report, [{"Content-Type", "application/json"}])
-    end
-  end
-
-  defmodule StdOut do
-    @moduledoc """
-    Format and print the report to standard out.
-    """
-
-    def transmit(_dest, %{address: address, check_id: id, results: %{time: time}}) do
-      IO.puts "#{address} (#{id}): #{time}ms"
-    end
-  end
-
-  defmodule Inbox do
-    @moduledoc """
-    Using the OTP mailbox to submit report.
-    """
-
-    def transmit(dest, report), do: send(dest, report)
-  end
-
-  @defaults [transport: StdOut]
+  @auth_token Application.get_env(:medic, :auth_token)
 
   ### Client API
 
@@ -54,7 +20,7 @@ defmodule Medic.Reporter do
   @doc """
   Initialize our GenServer.
   """
-  def init(opts), do: {:ok, Keyword.merge(@defaults, opts)}
+  def init(opts), do: {:ok, opts}
 
   @doc """
   Submit a given report.
@@ -63,9 +29,26 @@ defmodule Medic.Reporter do
 
   ### Service API
 
+  @doc false
   def handle_cast(report, opts) do
-    Task.async(opts[:transport], :transmit, [opts[:dest], report])
+    %{"report" => report}
+    |> Poison.encode!
+    |> http_post(opts[:dest])
 
     {:noreply, opts}
   end
+
+  @doc false
+  defp http_post(report, dest) do
+    HTTPoison.post!(dest, report, http_headers)
+  end
+
+  @doc false
+  defp http_headers do
+    [
+      {"Content-Type", "application/json"},
+      {"Authorization", "Bearer " <> @auth_token}
+    ]
+  end
+
 end

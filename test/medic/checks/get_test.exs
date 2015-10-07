@@ -3,11 +3,11 @@ defmodule Medic.Checks.GetTest do
 
   alias Medic.Checks.Get
 
-  @defaults %{address: "example.com", id: 1}
+  @defaults %{target: "example.com", id: 1}
 
   test "reports successful get" do
-    assert %{check_id: 1, results: %{body: body, time: time}} = Get.perform(@defaults)
+    assert %{health_check_id: 1, successful: success, response_time: time} = Get.perform(@defaults)
+    assert success
     assert is_float(time)
-    assert is_binary(body)
   end
 end

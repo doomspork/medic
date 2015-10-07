@@ -16,9 +16,8 @@ config :logger, :console,
   metadata: [:user_id]
 
 config :medic,
+  auth_token: "",
   check_freq: (1000 * 60),
-  checks: [],
-  no_update: false,
   report_url: "",
   update_freq: (1000 * 60 * 60),
   update_url: ""

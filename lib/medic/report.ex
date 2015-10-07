@@ -3,8 +3,8 @@ defmodule Medic.Report do
   Struct representation of a health check report.
   """
 
-  defstruct address: nil,
-            check_id: nil,
-            results: %{},
+  defstruct response_time: nil,
+            health_check_id: nil,
+            successful: false,
             time: :os.system_time(:seconds)
 end

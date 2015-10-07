@@ -3,7 +3,7 @@ defmodule Medic.Check do
   Struct representation of a check.
   """
 
-  defstruct address: nil,
-            id: nil,
+  defstruct id: nil,
+            target: nil,
             type: nil
 end

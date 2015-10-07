@@ -8,7 +8,7 @@ defmodule Medic.Checks.Ping do
   @doc """
   Perform the given %Check{} and return an appropriate %Report{}.
   """
-  def perform(%{address: address, id: id}) do
+  def perform(%{target: address, id: id}) do
     time = try do
              {cmd_output, _} = System.cmd("ping", ping_args(address))
              parse_output(cmd_output)
@@ -16,7 +16,7 @@ defmodule Medic.Checks.Ping do
              _e -> nil
            end
 
-    %Report{address: address, check_id: id, results: %{time: time}}
+    %Report{health_check_id: id, successful: not is_nil(time), response_time: time}
   end
 
   defp darwin? do

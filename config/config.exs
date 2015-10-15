@@ -20,7 +20,8 @@ config :medic,
   check_freq: (1000 * 60),
   report_url: "",
   update_freq: (1000 * 60 * 60),
-  update_url: ""
+  update_url: "",
+  user_agent: "Medic"
 
 # It is also possible to import configuration files, relative to this
 # directory. For example, you can emulate configuration per environment

@@ -6,8 +6,6 @@ defmodule Medic.Checks.Get do
 
   alias Medic.Report
 
-  @user_agent "Medic"
-
   defmodule TimedRequest do
     @moduledoc """
     A wrapper for HTTPoison so can track the request time.
@@ -24,7 +22,7 @@ defmodule Medic.Checks.Get do
   Perform a timed HTTP request for a given address.
   """
   def perform(%{target: address, id: id}) do
-    {time, response} = TimedRequest.get(address, %{"User-Agent" => @user_agent})
+    {time, response} = TimedRequest.get(address, %{"User-Agent" => user_agent})
     _body = case response do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} -> body
       _ -> nil
@@ -33,5 +31,10 @@ defmodule Medic.Checks.Get do
     time = time / 1000.0
 
     %Report{health_check_id: id, successful: not is_nil(time), response_time: time}
+  end
+
+  @doc false
+  defp user_agent do
+    Application.get_env(:medic, :user_agent)
   end
 end

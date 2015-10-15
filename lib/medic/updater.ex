@@ -9,8 +9,6 @@ defmodule Medic.Updater do
   alias Medic.Storage
   alias Medic.Check
 
-  @auth_token Application.get_env(:medic, :auth_token)
-
   @doc """
   Request an updated list of of health checks.
   """
@@ -23,18 +21,25 @@ defmodule Medic.Updater do
     {:noreply, opts}
   end
 
-  defp request_list(url), do: HTTPoison.get(url, [{"Authorization", "Bearer " <> @auth_token}])
+  @doc false
+  defp auth_token, do: Application.get_env(:medic, :auth_token)
 
+  @doc false
+  defp request_list(url), do: HTTPoison.get(url, [{"Authorization", "Bearer " <> auth_token}])
+
+  @doc false
   defp parse_response({:ok, %{status_code: 200, body: body}}) do
     %{"data" => checks} = Poison.decode!(body, as: %{"data" => [Check]})
     checks
   end
 
+  @doc false
   defp parse_response({:ok, %{status_code: _others}}) do
     Logger.error "Error occurred contacting the update server."
   end
   defp parse_response({:error, %HTTPoison.Error{reason: reason}}), do: reason
 
+  @doc false
   defp update_storage(msg) when is_binary(msg), do: IO.error(msg)
   defp update_storage(data) when is_list(data) do
     Storage.update(data)

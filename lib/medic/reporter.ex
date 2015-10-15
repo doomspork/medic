@@ -39,6 +39,9 @@ defmodule Medic.Reporter do
   end
 
   @doc false
+  defp auth_token, do: Application.get_env(:medic, :auth_token)
+
+  @doc false
   defp http_post(report, dest) do
     HTTPoison.post!(dest, report, http_headers)
   end
@@ -47,7 +50,7 @@ defmodule Medic.Reporter do
   defp http_headers do
     [
       {"Content-Type", "application/json"},
-      {"Authorization", "Bearer " <> @auth_token}
+      {"Authorization", "Bearer " <> auth_token}
     ]
   end
 

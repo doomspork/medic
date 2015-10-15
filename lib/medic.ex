@@ -18,7 +18,7 @@ defmodule Medic do
   end
 
   defp config_children(opts) do
-    children = [
+    [
       supervisor(Task.Supervisor, [[name: :tasks_sup]]),
       worker(Medic.Checker, [[interval: opts[:check_freq]]]),
       worker(Medic.Reporter, [[dest: opts[:report_url]]]),

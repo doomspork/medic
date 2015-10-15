@@ -6,7 +6,7 @@ defmodule Medic.CheckerTest do
   alias Medic.Storage
 
   setup_all do
-    check = %{target: "127.0.0.1", type: :ping, id: 1}
+    check = %{target: "127.0.0.1", type: "ping", id: 1}
     Storage.start_link([check])
 
     {:ok, []}

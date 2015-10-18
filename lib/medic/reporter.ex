@@ -6,7 +6,7 @@ defmodule Medic.Reporter do
 
   require Logger
 
-  @defaults [transport: JSON]
+  @defaults [transport: Medic.Reporter.JSON]
 
   defmodule JSON do
     @moduledoc """

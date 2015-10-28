@@ -8,6 +8,7 @@ defmodule Medic.Checker do
 
   alias Medic.Checks.Get
   alias Medic.Checks.Ping
+  alias Medic.Report
   alias Medic.Reporter
   alias Medic.Storage
 
@@ -24,7 +25,15 @@ defmodule Medic.Checker do
   def check(check) do
     check
     |> perform
+    |> apply_timestamp
     |> Reporter.report
+  end
+
+  defp apply_timestamp(report) do
+    timestamp = :calendar.universal_time
+                |> :calendar.datetime_to_gregorian_seconds
+
+    %Report{report | time: timestamp}
   end
 
   defp perform(%{type: "get"} = check), do: Get.perform(check)

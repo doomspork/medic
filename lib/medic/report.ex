@@ -6,5 +6,5 @@ defmodule Medic.Report do
   defstruct response_time: nil,
             health_check_id: nil,
             successful: false,
-            time: :os.system_time(:seconds)
+            time: nil
 end

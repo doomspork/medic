@@ -1,6 +1,6 @@
 # Medic
 
-Medic is an daemon for recurring healthchecks on remote hosts.
+Medic is an daemon for recurring healthchecks on remote hosts. See [Hospital](https://github.com/doomspork/hospital) for more details.
 
 ## Requirements
 
